@@ -11,18 +11,22 @@
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.2.19",
+        "autoprefixer": "^10.4.16",
         "axios": "^0.21",
         "eslint": "^7.32.0",
         "eslint-plugin-vue": "^7.19.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
+        "postcss": "^8.4.30",
+        "tailwindcss": "^3.3.3",
         "vue-loader": "^16.8.1"
     },
     "dependencies": {
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-vue3": "^0.5.2",
         "@inertiajs/progress": "^0.2.6",
+        "@tailwindcss/forms": "^0.5.6",
+        "lucide-vue-next": "^0.279.0",
         "vue": "^3.2.19"
     }
 }

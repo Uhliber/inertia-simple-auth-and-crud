@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use Auth;
 use Inertia\Inertia;
@@ -42,7 +43,11 @@ class UsersController extends Controller
     {
         $attributes = Request::validate([
             'name' => 'required',
-            'email' => ['required', 'email'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')
+            ],
             'password' => 'required',
         ]);
 

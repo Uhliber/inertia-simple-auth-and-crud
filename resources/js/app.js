@@ -4,8 +4,8 @@ import { InertiaProgress } from "@inertiajs/progress";
 import Layout from "./Shared/Layout";
 
 createInertiaApp({
-  resolve: name => {
-    let page = require(`./Pages/${name}`).default;
+  resolve: async name => {
+    let page = (await import(`./Pages/${name}`)).default;
 
     if (page.layout === undefined) {
       page.layout = Layout;
@@ -26,6 +26,6 @@ createInertiaApp({
 });
 
 InertiaProgress.init({
-  color: "red",
+  color: "blue",
   showSpinner: true,
 });

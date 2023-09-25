@@ -3,12 +3,25 @@
 
   <div class="flex justify-between mb-6">
     <div class="flex items-center">
-      <h1 class="text-3xl">Users</h1>
+      <h1 class="text-3xl">
+        Users
+      </h1>
 
-      <Link v-if="can.createUser" href="/users/create" class="text-blue-500 text-sm ml-3">New User</Link>
+      <Link
+        v-if="can.createUser"
+        href="/users/create"
+        class="text-blue-500 text-sm ml-3"
+      >
+        New User
+      </Link>
     </div>
 
-    <input v-model="search" type="text" placeholder="Search..." class="border px-2 rounded-lg" />
+    <input
+      v-model="search"
+      type="text"
+      placeholder="Search..."
+      class="border px-2 rounded-lg"
+    >
   </div>
 
   <div class="flex flex-col">
@@ -29,7 +42,9 @@
                 </td>
 
                 <td v-if="user.can.edit" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <Link :href="`/users/${user.id}/edit`" class="text-indigo-600 hover:text-indigo-900"> Edit</Link>
+                  <Link :href="`/users/${user.id}/edit`" class="text-indigo-600 hover:text-indigo-900">
+                    Edit
+                  </Link>
                 </td>
               </tr>
             </tbody>
@@ -39,13 +54,13 @@
     </div>
   </div>
 
-  <Pagination :links="users.links" class="mt-6" />
+  <Pagination :page-data="users" class="mt-6" />
 </template>
 
 <script setup>
-import Pagination from '../../Shared/Pagination';
-import { ref, watch } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+import Pagination from "@/Shared/Pagination";
+import { ref, watch } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 import debounce from "lodash/debounce";
 
 let props = defineProps({
@@ -57,6 +72,6 @@ let props = defineProps({
 let search = ref(props.filters.search);
 
 watch(search, debounce(function (value) {
-  Inertia.get('/users', { search: value }, { preserveState: true, replace: true });
+  Inertia.get("/users", { search: value }, { preserveState: true, replace: true });
 }, 300));
 </script>
