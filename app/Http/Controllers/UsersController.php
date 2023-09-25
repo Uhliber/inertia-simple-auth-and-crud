@@ -55,4 +55,21 @@ class UsersController extends Controller
 
         return redirect('/users');
     }
+
+    public function update(User $user)
+    {
+        $attributes = Request::validate([
+            'name' => 'required',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'password' => 'required',
+        ]);
+
+        $user->update($attributes);
+
+        return redirect('/users');
+    }
 }

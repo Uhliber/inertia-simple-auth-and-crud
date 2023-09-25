@@ -42,9 +42,9 @@
                 </td>
 
                 <td v-if="user.can.edit" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <Link :href="`/users/${user.id}/edit`" class="text-indigo-600 hover:text-indigo-900">
+                  <button class="text-indigo-600 hover:text-indigo-900" @click="handleEdit">
                     Edit
-                  </Link>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -55,10 +55,18 @@
   </div>
 
   <Pagination :page-data="users" class="mt-6" />
+  <Teleport to="body">
+    <Modal
+      :show="showEditModal"
+      title="Demo Title"
+      @close="showEditModal = false"
+    />
+  </Teleport>
 </template>
 
 <script setup>
 import Pagination from "@/Shared/Pagination";
+import Modal from "@/Shared/Modal";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import debounce from "lodash/debounce";
@@ -69,7 +77,12 @@ let props = defineProps({
   can: Object
 });
 
+let showEditModal = ref(false);
 let search = ref(props.filters.search);
+
+const handleEdit = () => {
+  showEditModal.value = true;
+};
 
 watch(search, debounce(function (value) {
   Inertia.get("/users", { search: value }, { preserveState: true, replace: true });
