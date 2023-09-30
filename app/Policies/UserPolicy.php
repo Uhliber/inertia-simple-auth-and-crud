@@ -12,7 +12,7 @@ class UserPolicy
 
     public function create(User $user)
     {
-        return $user->email === 'olie@chanzglobal.com';
+        return $user->email === 'admin@test.com';
     }
 
     public function edit(User $user, User $model)
