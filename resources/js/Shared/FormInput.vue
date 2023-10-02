@@ -30,7 +30,6 @@
 </template>
 
 <script setup>
-import { defineEmits } from "vue";
 import { AlertCircle } from "lucide-vue-next";
 
 defineProps({
