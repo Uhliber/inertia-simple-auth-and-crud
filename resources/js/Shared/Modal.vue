@@ -73,8 +73,8 @@
     </div>
   </Transition>
 </template>
-<script setup>
 
+<script setup>
 defineProps({
   show: {
     type: Boolean,
