@@ -13,45 +13,25 @@
   </h1>
   <div class="bg-slate-600 p-4 mt-2">
     <div id="example-block">
-      <pre>
-        <code ref="example-code">
-          class Example
-          {
-            public function __construct(
-              {
-                // Hello
-              }
-            )
-          }
-        </code>
-      </pre>
+      <Highlight :code="snippet" />
     </div>
     <br>
-    <pre>
-      <code>
-        class Another Example
-        {
-          public function __construct(
-            {
-              // World
-            }
-          )
-        }
-      </code>
-    </pre>
+    <Highlight :code="snippet" />
   </div>
 </template>
 
-<script>
-import { highlight } from "@/Services/SyntaxHighlighting";
+<script setup>
+import Highlight from "@/Components/Highlight.vue";
 
-export default {
-  mounted() {
-    // highlight("#example-block");
-
-    // highlightElement(this.$refs["example-code"]);
-
-    highlight();
-  }
-};
+let snippet = `
+class Example
+      {
+        public function __construct(
+          {
+            // Hello World
+          }
+        )
+      }
+`
+  .trim();
 </script>
