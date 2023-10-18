@@ -67,18 +67,21 @@
 <script setup>
 import Pagination from "@/Shared/Pagination";
 import Modal from "@/Shared/Modal";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import debounce from "lodash/debounce";
+import { useCurrentUser } from "@/Composables/useCurrentUser";
 
-let props = defineProps({
+const props = defineProps({
   users: Object,
   filters: Object,
   can: Object
 });
 
-let showEditModal = ref(false);
-let search = ref(props.filters.search);
+const showEditModal = ref(false);
+const search = ref(props.filters.search);
+
+const currentUser = useCurrentUser();
 
 const handleEdit = () => {
   showEditModal.value = true;
@@ -87,4 +90,8 @@ const handleEdit = () => {
 watch(search, debounce(function (value) {
   Inertia.get("/users", { search: value }, { preserveState: true, replace: true });
 }, 300));
+
+onMounted(() => {
+  console.log(currentUser);
+});
 </script>
