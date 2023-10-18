@@ -25,13 +25,13 @@ import Highlight from "@/Components/Highlight.vue";
 
 let snippet = `
 class Example
-      {
-        public function __construct(
-          {
-            // Hello World
-          }
-        )
-      }
+{
+  public function __construct(
+    {
+      // Hello World
+    }
+  )
+}
 `
   .trim();
 </script>
