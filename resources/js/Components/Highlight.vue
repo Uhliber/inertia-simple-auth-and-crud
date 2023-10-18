@@ -2,10 +2,11 @@
   <div>
     <header class="bg-gray-800 text-white flex justify-end px-2 py-1 text-xs border-b border-gray-700">
       <button
+        v-if="supported"
         class="rounded px-2"
         :class="{'hover:bg-gray-600': !copied}"
         :disabled="copied"
-        @click="copyToClipboard"
+        @click="copy"
       >
         {{ copied ? 'Copied' : 'Copy' }}
       </button>
@@ -16,10 +17,12 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
+import { useClipboard } from "@/Composables/useClipboard";
 import { highlightElement } from "@/Services/SyntaxHighlighting";
 
 const codeBlock = ref(null);
-const copied = ref(false);
+
+const { copy, copied, supported } = useClipboard(props.code);
 
 const props = defineProps({
   code: {
@@ -31,19 +34,4 @@ const props = defineProps({
 onMounted(() => {
   highlightElement(codeBlock.value);
 });
-
-const copyToClipboard = () => {
-  if (navigator && navigator.clipboard) {
-    navigator.clipboard.writeText(props.code);
-    copied.value = true;
-
-    setTimeout(() => {
-      copied.value = false;
-    }, 3000);
-
-    return;
-  }
-
-  // handle not supporte devices
-};
 </script>
